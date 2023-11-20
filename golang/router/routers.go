@@ -1,4 +1,4 @@
-package module
+package router
 
 import (
 	"SpiderShop-Restfull-API/common"
@@ -8,7 +8,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func V1Routers(r *gin.Engine, aptx *common.AppConext) {
+func V1Router(r *gin.Engine, aptx *common.AppConext) {
 	r.Use(middleware.Recovery())
 
 	r.GET("/ping", func(c *gin.Context) {
@@ -16,10 +16,13 @@ func V1Routers(r *gin.Engine, aptx *common.AppConext) {
 			"test": "pinghhhhhhhhhhhhh",
 		})
 	})
-	// // router API
-	// api := r.Group("/api")
 
-	// // router V1
-	// v1 := api.Group("/v1")
-
+	api := r.Group("/api")
+	{
+		v1 := api.Group("/v1")
+		{
+			// user
+			getUserRouters(v1, aptx)
+		}
+	}
 }

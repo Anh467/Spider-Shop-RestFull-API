@@ -2,6 +2,7 @@ package middleware
 
 import (
 	common "SpiderShop-Restfull-API/common"
+	"net/http"
 
 	"github.com/gin-gonic/gin"
 )
@@ -22,11 +23,15 @@ func Recovery() gin.HandlerFunc {
 						},
 					})
 					// simultaneously stop middleware and return
-					c.Abort()
-					return
+				} else {
+					c.JSON(http.StatusBadRequest, gin.H{
+						"Error": err,
+					})
 				}
+				c.Abort()
+				return
 			}
-			c.Next()
 		}()
+		c.Next()
 	}
 }

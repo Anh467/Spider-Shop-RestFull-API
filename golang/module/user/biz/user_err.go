@@ -11,7 +11,7 @@ const USER_PATTERN_Account = `^[^\s]{8,100}$`
 const USER_ERR_PATTERN_Account = `Maximum 100 characters, minimum 8 characters, can’t have space`
 
 // Password
-const USER_PATTERN_Password = `^(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\S+$).{8,100}$`
+const USER_PATTERN_Password = `^[^\s]{8,100}(.*[a-z].*)(.*[A-Z].*)(.*[!@#$%^&*()_+={}\[\]:;<>,.?~\\/-].*)[^\s]*$`
 const USER_ERR_PATTERN_Password = "Maximum 100 characters and minimum 8 character , can’t have space, at least ( 1 uppercase, 1 lowercase, 1 special character)"
 
 // Name

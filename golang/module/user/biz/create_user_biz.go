@@ -12,19 +12,26 @@ import (
 func (b *createBiz) CreateUserBiz(c context.Context, userCreate entity.UserCreate) entity.UserJWTModel {
 	// declare variables
 	var match bool
+	var err error
 	// reset UserID bc of increase of userid so it have to reset userid to default
 	userCreate.UserID = 0
 	// checking biz
 	// Account
-	match, _ = regexp.MatchString(USER_ERR_PATTERN_Mail, userCreate.Account)
-	if !match {
-		panic(&common.ErrorHandler{
-			ErrorCode:    http.StatusBadRequest,
-			ErrorMessage: USER_ERR_PATTERN_Account,
-		})
-	}
+	/*
+		userCreate.Account = strings.Trim(userCreate.Account, " ")
+		match, _ = regexp.MatchString(USER_PATTERN_Account, userCreate.Account)
+		if !match {
+			panic(&common.ErrorHandler{
+				ErrorCode:    http.StatusBadRequest,
+				ErrorMessage: USER_ERR_PATTERN_Account,
+			})
+		}
+	*/
 	// Password
-	match, _ = regexp.MatchString(USER_ERR_PATTERN_Password, userCreate.Password)
+	match, err = regexp.MatchString(USER_PATTERN_Password, userCreate.Password)
+	if err != nil {
+		panic(err)
+	}
 	if !match {
 		panic(&common.ErrorHandler{
 			ErrorCode:    http.StatusBadRequest,
@@ -41,7 +48,7 @@ func (b *createBiz) CreateUserBiz(c context.Context, userCreate entity.UserCreat
 		})
 	}
 	//check regex
-	match, _ = regexp.MatchString(USER_ERR_PATTERN_Name, userCreate.Name)
+	match, _ = regexp.MatchString(USER_PATTERN_Name, userCreate.Name)
 	if !match {
 		panic(&common.ErrorHandler{
 			ErrorCode:    http.StatusBadRequest,

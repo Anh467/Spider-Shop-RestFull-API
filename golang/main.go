@@ -2,7 +2,7 @@ package main
 
 import (
 	common "SpiderShop-Restfull-API/common"
-	"SpiderShop-Restfull-API/module"
+	"SpiderShop-Restfull-API/router"
 	"encoding/json"
 	"fmt"
 	"os"
@@ -44,7 +44,7 @@ func main() {
 	}
 	fmt.Println("Connect to mysql successfully ")
 	// setting gin
-	gin.SetMode(gin.DebugMode)
+	gin.SetMode(gin.ReleaseMode)
 	// init gin
 	r = gin.Default()
 	// setting
@@ -59,9 +59,9 @@ func main() {
 	r.SetTrustedProxies([]string{"127.0.0.1", "192.168.1.2", "10.0.0.0/8"})
 	// middleware recover
 	// router
-	module.V1Routers(r, &appctx)
+	router.V1Router(r, &appctx)
 	// run
-	r.Run(appctx.Port)
+	r.Run()
 }
 
 func ConnectSqlServerGorm(MySQL common.MySQL, db *gorm.DB) error {
