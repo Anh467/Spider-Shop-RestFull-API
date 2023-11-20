@@ -3,14 +3,16 @@ package common
 import "gorm.io/gorm"
 
 type AppConext struct {
-	GormDB          gorm.DB   `json:"gormdb"`
-	AllowHeaders    string    `json:"allowheaders"`
-	AllowAllOrigins bool      `json:"allowallorigins"`
-	Port            string    `json:"port"`
-	SuperSecretKey  string    `json:"secretKey"`
-	MongoDB         MongoDB   `json:"mongodb"`
-	SqlServer       SqlServer `json:"sqlserver"`
-	MySQL           MySQL     `json:"mysql"`
+	GormDB           gorm.DB   `json:"gormdb"`
+	AllowHeaders     []string  `json:"allowheaders"`
+	AllowAllOrigins  bool      `json:"allowallorigins"`
+	AllowMethods     []string  `json:"allowmethods"`
+	AllowCredentials bool      `json:"allowcredentials"`
+	Port             string    `json:"port"`
+	SuperSecretKey   string    `json:"secretKey"`
+	MongoDB          MongoDB   `json:"mongodb"`
+	SqlServer        SqlServer `json:"sqlserver"`
+	MySQL            MySQL     `json:"mysql"`
 }
 
 type MongoDB struct {

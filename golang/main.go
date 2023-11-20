@@ -2,10 +2,13 @@ package main
 
 import (
 	common "SpiderShop-Restfull-API/common"
+	"SpiderShop-Restfull-API/module"
 	"encoding/json"
 	"fmt"
 	"os"
 
+	"github.com/gin-contrib/cors"
+	"github.com/gin-gonic/gin"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 )
@@ -14,6 +17,7 @@ const FILE_CONTEXT = "config.json"
 
 func main() {
 	// declare
+	var r *gin.Engine
 	var appctx common.AppConext
 	var file *os.File
 	var content string
@@ -39,6 +43,25 @@ func main() {
 		return
 	}
 	fmt.Println("Connect to mysql successfully ")
+	// setting gin
+	gin.SetMode(gin.DebugMode)
+	// init gin
+	r = gin.Default()
+	// setting
+	r.Use(cors.New(cors.Config{
+		AllowHeaders:     appctx.AllowHeaders,
+		AllowAllOrigins:  appctx.AllowAllOrigins,
+		AllowMethods:     appctx.AllowMethods,
+		AllowCredentials: appctx.AllowCredentials,
+	}))
+	//
+	r.ForwardedByClientIP = true
+	r.SetTrustedProxies([]string{"127.0.0.1", "192.168.1.2", "10.0.0.0/8"})
+	// middleware recover
+	// router
+	module.V1Routers(r, &appctx)
+	// run
+	r.Run(appctx.Port)
 }
 
 func ConnectSqlServerGorm(MySQL common.MySQL, db *gorm.DB) error {

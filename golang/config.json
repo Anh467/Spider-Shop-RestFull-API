@@ -1,6 +1,8 @@
 {
-    "allowheaders": "*",
+    "allowheaders": ["*"],
     "allowallorigins": true,
+    "allowmethods" : ["GET", "POST", "PUT", "PATCH", "DELETE", "HEAD", "OPTIONS"],
+    "allowcredentials": true,
     "port" :"8080",
     "secretKey" : "rqewrqwerqwerqwerqwerqwer",
     "mongodb":{
