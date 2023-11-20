@@ -1,0 +1,26 @@
+{
+    "allowheaders": "*",
+    "allowallorigins": true,
+    "port" :"8080",
+    "secretKey" : "rqewrqwerqwerqwerqwerqwer",
+    "mongodb":{
+        "url": "mongodb://localhost:27017",
+        "db": "Shop"
+    },
+    "sqlserver" : {
+        "host": "MSI\\SQLEXPRESS",
+        "user":"viet080702",
+        "pass": "nguyenanhviet",
+        "db": "Shop",
+        "options":"",
+        "dialect": "mssql"
+    },
+    "mysql" : {
+        "host": "root",
+        "user":"root",
+        "pass": "Viet@080702",
+        "db": "Shop",
+        "options":"",
+        "dialect": "mysql"
+    }
+}
