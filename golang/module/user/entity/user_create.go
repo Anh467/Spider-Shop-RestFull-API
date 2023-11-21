@@ -7,7 +7,7 @@ type UserCreate struct {
 	Name     string `json:"name" gorm:"column:Name"`
 	Gender   string `json:"gender" gorm:"column:Gender"`
 	Mail     string `json:"mail" gorm:"column:Mail"`
-	Birthday string `json:"birthday" gorm:"column:Birthday"`
+	Birth    string `json:"birth" gorm:"column:Birth"`
 }
 
 func (UserCreate) TableModel() string {

@@ -18,8 +18,7 @@ func (s *sqlserverStore) CreateUserStorage(c context.Context, userCreate entity.
 	var err error
 	var count int64
 	// check existing account
-	s.aptx.GormDB.Where("Account = ?", userCreate.Account).
-		First(&entity.UserModel{}).
+	s.aptx.GormDB.Table(entity.USER_TABLE).Where("Account = ?", userCreate.Account).
 		Count(&count)
 	if count > 0 {
 		panic(&common.ErrorHandler{
@@ -28,7 +27,7 @@ func (s *sqlserverStore) CreateUserStorage(c context.Context, userCreate entity.
 		})
 	}
 	// create
-	if err := s.aptx.GormDB.Create(&userCreate).Error; err != nil {
+	if err := s.aptx.GormDB.Table(entity.USER_TABLE).Create(&userCreate).Error; err != nil {
 		if errors.Is(err, gorm.ErrInvalidField) {
 			panic(&common.ErrorHandler{
 				ErrorMessage: biz.USER_ERR_CANNOT_CREATE,
@@ -53,7 +52,7 @@ func (s *sqlserverStore) CreateUserStorage(c context.Context, userCreate entity.
 	userJWTModel.Name = userCreate.Name
 	userJWTModel.Gender = userCreate.Gender
 	userJWTModel.Mail = userCreate.Mail
-	userJWTModel.Birthday = userCreate.Birthday
+	userJWTModel.Birth = userCreate.Birth
 	userJWTModel.Token = token
 	// return user data which was created
 	return *userJWTModel

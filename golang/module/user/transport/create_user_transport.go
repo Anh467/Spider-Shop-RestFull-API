@@ -10,6 +10,19 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// ListUsers godoc
+// @Summary      post users
+// @Description  user can able create new account
+// @Tags         users
+// @Accept       json
+// @Produce      json
+// @Param        user body   model.Create  true "User object that needs to be added"
+// @Success      201  {object}   model.Account
+// @Failure      400  {object}  httputil.HTTPError
+// @Failure      404  {object}  httputil.HTTPError
+// @Failure      500  {object}  httputil.HTTPError
+// @Router       /user [POST]
+
 func CreateUserTransport(aptx *common.AppConext) func(c *gin.Context) {
 	return func(c *gin.Context) {
 		// declare variable

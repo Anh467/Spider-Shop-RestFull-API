@@ -3,7 +3,7 @@ package common
 import "gorm.io/gorm"
 
 type AppConext struct {
-	GormDB           gorm.DB   `json:"gormdb"`
+	GormDB           *gorm.DB  `json:"gormdb"`
 	AllowHeaders     []string  `json:"allowheaders"`
 	AllowAllOrigins  bool      `json:"allowallorigins"`
 	AllowMethods     []string  `json:"allowmethods"`

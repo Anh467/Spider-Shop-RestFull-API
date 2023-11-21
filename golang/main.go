@@ -2,6 +2,7 @@ package main
 
 import (
 	common "SpiderShop-Restfull-API/common"
+	_ "SpiderShop-Restfull-API/docs"
 	"SpiderShop-Restfull-API/router"
 	"encoding/json"
 	"fmt"
@@ -9,12 +10,20 @@ import (
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
+	swaggerFiles "github.com/swaggo/files"
+	ginSwagger "github.com/swaggo/gin-swagger"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 )
 
 const FILE_CONTEXT = "config.json"
 
+// @contact.email  van123872000@gmail.com
+// @title SpiderShop-Restfull-API
+// @version 1.0
+// @description Spider shop Restfull API using Gin Framework, Gorm orm and other libraries
+// @host localhost:8080
+// @BasePath /api/v1
 func main() {
 	// declare
 	var r *gin.Engine
@@ -38,7 +47,7 @@ func main() {
 		return
 	}
 	// connect to mysql
-	if err := ConnectSqlServerGorm(appctx.MySQL, &appctx.GormDB); err != nil {
+	if appctx.GormDB, err = ConnectSqlServerGorm(appctx.MySQL); err != nil {
 		fmt.Println("Connect to mysql failed " + err.Error())
 		return
 	}
@@ -47,6 +56,8 @@ func main() {
 	gin.SetMode(gin.ReleaseMode)
 	// init gin
 	r = gin.Default()
+	// add middleware swagger
+	r.GET("/docs/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 	// setting
 	r.Use(cors.New(cors.Config{
 		AllowHeaders:     appctx.AllowHeaders,
@@ -64,18 +75,20 @@ func main() {
 	r.Run()
 }
 
-func ConnectSqlServerGorm(MySQL common.MySQL, db *gorm.DB) error {
+func ConnectSqlServerGorm(MySQL common.MySQL) (*gorm.DB, error) {
 	// create connection string
 	connString := fmt.Sprintf("%s:%s@tcp(127.0.0.1:3306)/%s?charset=utf8mb4&parseTime=True&loc=Local",
 		MySQL.User, MySQL.Pass, MySQL.DB)
+	//declare
+	var db *gorm.DB
 	var err error
 	// connect to database
 	if db, err = gorm.Open(mysql.Open(connString), &gorm.Config{}); err != nil {
 		// getting error and handle it
 		fmt.Println("Connecting my sql server failure")
-		return err
+		return nil, err
 	}
 	// connect to database successfully and print success
 	fmt.Println("Connecting my sql server successfully")
-	return nil
+	return db, nil
 }

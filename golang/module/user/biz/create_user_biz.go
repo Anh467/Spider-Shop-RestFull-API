@@ -7,6 +7,8 @@ import (
 	"net/http"
 	"regexp"
 	"strings"
+
+	"github.com/dlclark/regexp2"
 )
 
 func (b *createBiz) CreateUserBiz(c context.Context, userCreate entity.UserCreate) entity.UserJWTModel {
@@ -17,27 +19,25 @@ func (b *createBiz) CreateUserBiz(c context.Context, userCreate entity.UserCreat
 	userCreate.UserID = 0
 	// checking biz
 	// Account
-	/*
-		userCreate.Account = strings.Trim(userCreate.Account, " ")
-		match, _ = regexp.MatchString(USER_PATTERN_Account, userCreate.Account)
-		if !match {
-			panic(&common.ErrorHandler{
-				ErrorCode:    http.StatusBadRequest,
-				ErrorMessage: USER_ERR_PATTERN_Account,
-			})
-		}
-	*/
-	// Password
-	match, err = regexp.MatchString(USER_PATTERN_Password, userCreate.Password)
-	if err != nil {
-		panic(err)
-	}
+
+	userCreate.Account = strings.Trim(userCreate.Account, " ")
+	match, _ = regexp.MatchString(USER_PATTERN_Account, userCreate.Account)
 	if !match {
+		panic(&common.ErrorHandler{
+			ErrorCode:    http.StatusBadRequest,
+			ErrorMessage: USER_ERR_PATTERN_Account,
+		})
+	}
+
+	// Password
+	re := regexp2.MustCompile(USER_PATTERN_Password, regexp2.None)
+	if isMatch, _ := re.MatchString(userCreate.Password); !isMatch {
 		panic(&common.ErrorHandler{
 			ErrorCode:    http.StatusBadRequest,
 			ErrorMessage: USER_ERR_PATTERN_Password,
 		})
 	}
+
 	// Name
 	// check blank
 	userCreate.Name = strings.Trim(userCreate.Name, " ")
@@ -49,6 +49,7 @@ func (b *createBiz) CreateUserBiz(c context.Context, userCreate entity.UserCreat
 	}
 	//check regex
 	match, _ = regexp.MatchString(USER_PATTERN_Name, userCreate.Name)
+
 	if !match {
 		panic(&common.ErrorHandler{
 			ErrorCode:    http.StatusBadRequest,
@@ -75,7 +76,11 @@ func (b *createBiz) CreateUserBiz(c context.Context, userCreate entity.UserCreat
 	}
 
 	// Mail
-	match, _ = regexp.MatchString(USER_ERR_PATTERN_Mail, userCreate.Mail)
+	match, err = regexp.MatchString(USER_PATTERN_Mail, userCreate.Mail)
+
+	if err != nil {
+		panic(err)
+	}
 	if !match {
 		panic(&common.ErrorHandler{
 			ErrorCode:    http.StatusBadRequest,

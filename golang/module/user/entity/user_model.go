@@ -9,7 +9,7 @@ type UserModel struct {
 	Gender      string `json:"gender" gorm:"column:Gender"`
 	Phone       string `json:"phone" gorm:"column:Phone"`
 	Mail        string `json:"mail" gorm:"column:Mail"`
-	Birthday    string `json:"birthday" gorm:"column:Birthday"`
+	Birth       string `json:"birth" gorm:"column:Birth"`
 	Role        string `json:"role" gorm:"column:Role"`
 	Expenditure string `json:"expenditure" gorm:"column:Expenditure"`
 	NumOrder    int    `json:"numorder" gorm:"column:NumOrder"`
