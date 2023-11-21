@@ -1,7 +1,7 @@
 package entity
 
 type UserJWTModel struct {
-	UserID  int    `json:"user_id" gorm:"column:UserID;primaryKey"`
+	UserID  int    `json:"userid" gorm:"column:UserID;primaryKey"`
 	Account string `json:"account" gorm:"column:Account"`
 	Name    string `json:"name" gorm:"column:Name"`
 	Gender  string `json:"gender" gorm:"column:Gender"`

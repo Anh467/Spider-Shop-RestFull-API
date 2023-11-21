@@ -10,20 +10,19 @@ import (
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
-	swaggerFiles "github.com/swaggo/files"
-	ginSwagger "github.com/swaggo/gin-swagger"
+
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 )
 
 const FILE_CONTEXT = "config.json"
 
-// @contact.email  van123872000@gmail.com
-// @title SpiderShop-Restfull-API
+// @title SpiderShop-Restfull-API yeah
 // @version 1.0
 // @description Spider shop Restfull API using Gin Framework, Gorm orm and other libraries
 // @host localhost:8080
 // @BasePath /api/v1
+
 func main() {
 	// declare
 	var r *gin.Engine
@@ -56,8 +55,7 @@ func main() {
 	gin.SetMode(gin.ReleaseMode)
 	// init gin
 	r = gin.Default()
-	// add middleware swagger
-	r.GET("/docs/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
+
 	// setting
 	r.Use(cors.New(cors.Config{
 		AllowHeaders:     appctx.AllowHeaders,

@@ -1,7 +1,7 @@
 package entity
 
 type UserCreate struct {
-	UserID   int    `json:"user_id" gorm:"column:UserID;primaryKey"`
+	UserID   int    `json:"userid" gorm:"column:UserID;primaryKey"`
 	Account  string `json:"account" gorm:"column:Account"`
 	Password string `json:"password" gorm:"column:Password"`
 	Name     string `json:"name" gorm:"column:Name"`

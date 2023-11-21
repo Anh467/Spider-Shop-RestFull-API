@@ -10,6 +10,7 @@ import (
 func getUserRouters(v1 *gin.RouterGroup, aptx *common.AppConext) {
 	user := v1.Group("/users")
 	{
+
 		user.POST("/", transport.CreateUserTransport(aptx))
 	}
 }

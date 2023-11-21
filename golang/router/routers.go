@@ -6,18 +6,15 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	swaggerFiles "github.com/swaggo/files"
+	ginSwagger "github.com/swaggo/gin-swagger"
 )
 
-// PingExample godoc
-// @Summary ping example
-// @Schemes
-// @Description do ping (testing api working or not)
-// @Tags Testing
-// @Accept json
-// @Produce json
-// @Success 200 {string} Helloworld
-// @Router /ping [get]
 func V1Router(r *gin.Engine, aptx *common.AppConext) {
+	// add swagger
+	r.GET("/docs/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
+
+	// add hanlder error
 	r.Use(middleware.Recovery())
 
 	api := r.Group("/api")

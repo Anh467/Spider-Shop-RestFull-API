@@ -1,7 +1,7 @@
 package entity
 
 type UserGet struct {
-	UserID      int    `json:"user_id" gorm:"column:UserID;primaryKey"`
+	UserID      int    `json:"userid" gorm:"column:UserID;primaryKey"`
 	Account     string `json:"account" gorm:"column:Account"`
 	Name        string `json:"name" gorm:"column:Name"`
 	Image       string `json:"image" gorm:"column:Image"`

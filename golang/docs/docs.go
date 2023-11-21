@@ -15,9 +15,9 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
-        "/ping": {
-            "get": {
-                "description": "do ping",
+        "/users": {
+            "post": {
+                "description": "user can able create new account",
                 "consumes": [
                     "application/json"
                 ],
@@ -25,16 +25,99 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "example"
+                    "users"
                 ],
-                "summary": "ping example",
+                "summary": "post users",
+                "parameters": [
+                    {
+                        "description": "User object that needs to be added",
+                        "name": "user",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/entity.UserCreate"
+                        }
+                    }
+                ],
                 "responses": {
-                    "200": {
-                        "description": "OK",
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/entity.UserJWTModel"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "409": {
+                        "description": "Conflict",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "501": {
+                        "description": "Not Implemented",
                         "schema": {
                             "type": "string"
                         }
                     }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "entity.UserCreate": {
+            "type": "object",
+            "properties": {
+                "account": {
+                    "type": "string"
+                },
+                "birth": {
+                    "type": "string"
+                },
+                "gender": {
+                    "type": "string"
+                },
+                "mail": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                },
+                "user_id": {
+                    "type": "integer"
+                }
+            }
+        },
+        "entity.UserJWTModel": {
+            "type": "object",
+            "properties": {
+                "account": {
+                    "type": "string"
+                },
+                "birth": {
+                    "type": "string"
+                },
+                "gender": {
+                    "type": "string"
+                },
+                "mail": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "token": {
+                    "type": "string"
+                },
+                "user_id": {
+                    "type": "integer"
                 }
             }
         }
@@ -47,7 +130,7 @@ var SwaggerInfo = &swag.Spec{
 	Host:             "localhost:8080",
 	BasePath:         "/api/v1",
 	Schemes:          []string{},
-	Title:            "SpiderShop-Restfull-API",
+	Title:            "SpiderShop-Restfull-API yeah",
 	Description:      "Spider shop Restfull API using Gin Framework, Gorm orm and other libraries",
 	InfoInstanceName: "swagger",
 	SwaggerTemplate:  docTemplate,

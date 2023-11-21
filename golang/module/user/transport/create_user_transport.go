@@ -16,13 +16,12 @@ import (
 // @Tags         users
 // @Accept       json
 // @Produce      json
-// @Param        user body   model.Create  true "User object that needs to be added"
-// @Success      201  {object}   model.Account
-// @Failure      400  {object}  httputil.HTTPError
-// @Failure      404  {object}  httputil.HTTPError
-// @Failure      500  {object}  httputil.HTTPError
-// @Router       /user [POST]
-
+// @Param        user body  entity.UserCreate  true "User object that needs to be added"
+// @Success      201  {object}   entity.UserJWTModel
+// @Failure      400  {string} biz.USER_ERR_CANNOT_CREATE
+// @Failure      409  {string} biz.USER_ERR_CANNOT_CREATE
+// @Failure      501  {string} biz.USER_ERR_CANNOT_CREATE
+// @Router       /users [POST]
 func CreateUserTransport(aptx *common.AppConext) func(c *gin.Context) {
 	return func(c *gin.Context) {
 		// declare variable

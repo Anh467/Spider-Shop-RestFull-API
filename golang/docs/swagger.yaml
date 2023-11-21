@@ -1,24 +1,78 @@
 basePath: /api/v1
+definitions:
+  entity.UserCreate:
+    properties:
+      account:
+        type: string
+      birth:
+        type: string
+      gender:
+        type: string
+      mail:
+        type: string
+      name:
+        type: string
+      password:
+        type: string
+      user_id:
+        type: integer
+    type: object
+  entity.UserJWTModel:
+    properties:
+      account:
+        type: string
+      birth:
+        type: string
+      gender:
+        type: string
+      mail:
+        type: string
+      name:
+        type: string
+      token:
+        type: string
+      user_id:
+        type: integer
+    type: object
 host: localhost:8080
 info:
   contact: {}
   description: Spider shop Restfull API using Gin Framework, Gorm orm and other libraries
-  title: SpiderShop-Restfull-API
+  title: SpiderShop-Restfull-API yeah
   version: "1.0"
 paths:
-  /ping:
-    get:
+  /users:
+    post:
       consumes:
       - application/json
-      description: do ping
+      description: user can able create new account
+      parameters:
+      - description: User object that needs to be added
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/entity.UserCreate'
       produces:
       - application/json
       responses:
-        "200":
-          description: OK
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/entity.UserJWTModel'
+        "400":
+          description: Bad Request
           schema:
             type: string
-      summary: ping example
+        "409":
+          description: Conflict
+          schema:
+            type: string
+        "501":
+          description: Not Implemented
+          schema:
+            type: string
+      summary: post users
       tags:
-      - example
+      - users
 swagger: "2.0"
