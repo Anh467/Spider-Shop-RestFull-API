@@ -1,0 +1,60 @@
+Cate: "this is table contain category of animal like spider, frog, ant, ... "
+
+CateID: {
+	Type: int,
+	Constraint: auto increasement, unique, not null,
+}
+
+Name: {
+	Type: NVarchar(50),
+	Constraint: not null
+	Business: Can’t have special character
+}
+
+Desc: {
+	Type: NVarchar(300),
+	Default: "",
+}
+
+Image: {
+	Type: Varchar(200),
+	Default: “”	
+	Description: this is avatar which save in server 
+}
+
+Status: {
+	Type: Varchar(10),
+	Default: “Normal”,
+	Business: just in (“Normal”, “Hot”, “Deleted”)
+	Description: status of the category of the animal
+}
+
+Revenue: {
+	Type: double,
+	Default: 0
+	Description: Total money that user spending on this category
+}
+
+NumWareHouse: {
+	Type: int,
+	Default: 0	
+	Description: Total number of animal with  this CateID
+}
+
+NumOrder: {
+	Type: int,
+	Default: 0	
+	Description: Total Orders that user spending on shop
+}
+
+
+
+######################################## trigger ########################################
+orders: afterupdate {
+	Revenue: "update when status orders is complete "	
+}
+
+orders: afterupdate {
+	NumWareHouse: "Update when this animal with this CateID update NumWareHouse"
+	NumOrder: "plus to Expenditure when status orders is complete "
+}

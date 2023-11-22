@@ -1,0 +1,88 @@
+User:
+
+UserID: {
+	Type: int,
+	Constraint: auto increasement, unique, not null,
+}
+
+Account: {
+	Type: varchar(100),
+	Constraint: unique, not null
+	Business: Limit 100 characters, can’t have space
+}
+
+Password: {
+	Type: Varchar(255),
+	Constraint: not null
+	Business: Limit 100 characters and minimum 8 character , can’t have space, at least ( 1 uppercase, 1 lowercase, 1 special character)
+}
+
+Name: {
+	Type: NVarchar(50),
+	Constraint: not null
+	Business: Can’t have special character
+}
+
+Image: {
+	Type: Varchar(200),
+	Default: “”	
+Description: this is avatar which save in server 
+}
+
+Gender: {
+	Type: NVarchar(10),
+	Default: “Others”
+	Business: just in (“Male”, “Female”, “Others”)
+}
+
+Phone: {
+	Type: NVarchar(20),
+	Default: “”
+	Business: regex phone number
+}
+
+Mail: {
+	Type: NVarchar(100),
+	Default: “”
+	Business: regex mail
+}
+
+Birth: {
+	Type: datetime,
+	Default: today
+	Business: can’t have birth inappropriate can’t have (year now – 5) and can’t have (year now – 200)
+}
+
+Role: {
+	Type: Varchar(10),
+	Default: “User”
+	Business: in( “User”, “Admin”, “Staff”)
+}
+
+Expenditure: {
+	Type: double,
+	Default: 0
+	Business: in( “User”, “Admin”, “Staff”)
+	Description: Total money that user spending on shop
+}
+
+NumOrder: {
+	Type: int,
+	Default: 0	
+Description: Total Orders that user spending on shop
+}
+
+createdAt: {
+	Type: datetime,
+	Default: current_timestamp
+	Business: can’t have birth inappropriate can’t have (year now – 5) and can’t have (year now – 200)
+}
+
+updatedAt: {
+	Type: datetime,
+	Default: current_timestamp
+	Business: can’t have birth inappropriate can’t have (year now – 5) and can’t have (year now – 200)
+}
+
+
+

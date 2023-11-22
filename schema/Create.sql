@@ -17,4 +17,16 @@ create table User(
     createdAt datetime default current_timestamp,
 	updatedAt datetime default current_timestamp
 );
+
+-- ########################### dbo.Cate ###########################
+create table `Cate` (
+	`CateID` int auto_increment unique not null,
+    `Name` nvarchar(50) not null,
+    `Desc` nvarchar(300) default "",
+    `Image` varchar(200) default "",
+    `Status` varchar(10) default "Normal",
+    `Revenue` double default 0,
+    `NumWareHouse` int default 0,
+    `NumOrder` int default 0
+)
 -- tracking
