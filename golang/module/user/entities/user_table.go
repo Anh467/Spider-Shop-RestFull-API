@@ -18,3 +18,8 @@ const USER_TABLE_Expenditure = "Expenditure"
 const USER_TABLE_NumOrder = "NumOrder"
 const USER_TABLE_createdAt = "createdAt"
 const USER_TABLE_updatedAt = "updatedAt"
+
+// column USER_TABLE_Role
+const USER_TABLE_Role_ADMIN = "Admin"
+const USER_TABLE_Role_Staff = "Staff"
+const USER_TABLE_Role_User = "User"

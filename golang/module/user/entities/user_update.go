@@ -10,6 +10,6 @@ type UserUpdate struct {
 	Birth    string `json:"birth" gorm:"column:Birth"`
 }
 
-func (UserUpdate) TableModel() string {
+func (UserUpdate) TableName() string {
 	return USER_TABLE
 }

@@ -10,6 +10,6 @@ type UserJWTModel struct {
 	Token   string `json:"token"`
 }
 
-func (UserJWTModel) TableModel() string {
+func (UserJWTModel) TableName() string {
 	return USER_TABLE
 }

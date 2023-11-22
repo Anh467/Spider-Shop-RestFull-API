@@ -16,6 +16,6 @@ type UserGet struct {
 	UpdatedAt   string `json:"updated_at" gorm:"column:UpdatedAt"`
 }
 
-func (UserGet) TableModel() string {
+func (UserGet) TableName() string {
 	return USER_TABLE
 }

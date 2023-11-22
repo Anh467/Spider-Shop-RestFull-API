@@ -15,7 +15,7 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
-        "/users": {
+        "/register": {
             "post": {
                 "description": "user can able create new account",
                 "consumes": [
@@ -25,7 +25,7 @@ const docTemplate = `{
                     "application/json"
                 ],
                 "tags": [
-                    "users"
+                    "authen"
                 ],
                 "summary": "post users",
                 "parameters": [
@@ -35,7 +35,7 @@ const docTemplate = `{
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/entity.UserCreate"
+                            "$ref": "#/definitions/entities.UserCreate"
                         }
                     }
                 ],
@@ -43,7 +43,7 @@ const docTemplate = `{
                     "201": {
                         "description": "Created",
                         "schema": {
-                            "$ref": "#/definitions/entity.UserJWTModel"
+                            "$ref": "#/definitions/entities.UserJWTModel"
                         }
                     },
                     "400": {
@@ -66,10 +66,56 @@ const docTemplate = `{
                     }
                 }
             }
+        },
+        "/users": {
+            "get": {
+                "description": "this function must have permission administrator",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "users"
+                ],
+                "summary": "get users",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Limit the number of users to return",
+                        "name": "limit",
+                        "in": "query"
+                    },
+                    {
+                        "type": "integer",
+                        "description": "Offset the list of users",
+                        "name": "offset",
+                        "in": "query"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/entities.UserGet"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
         }
     },
     "definitions": {
-        "entity.UserCreate": {
+        "entities.UserCreate": {
             "type": "object",
             "properties": {
                 "account": {
@@ -90,12 +136,56 @@ const docTemplate = `{
                 "password": {
                     "type": "string"
                 },
-                "user_id": {
+                "userid": {
                     "type": "integer"
                 }
             }
         },
-        "entity.UserJWTModel": {
+        "entities.UserGet": {
+            "type": "object",
+            "properties": {
+                "account": {
+                    "type": "string"
+                },
+                "birth": {
+                    "type": "string"
+                },
+                "created_at": {
+                    "type": "string"
+                },
+                "expenditure": {
+                    "type": "string"
+                },
+                "gender": {
+                    "type": "string"
+                },
+                "image": {
+                    "type": "string"
+                },
+                "mail": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "numorder": {
+                    "type": "integer"
+                },
+                "phone": {
+                    "type": "string"
+                },
+                "role": {
+                    "type": "string"
+                },
+                "updated_at": {
+                    "type": "string"
+                },
+                "userid": {
+                    "type": "integer"
+                }
+            }
+        },
+        "entities.UserJWTModel": {
             "type": "object",
             "properties": {
                 "account": {
@@ -116,7 +206,7 @@ const docTemplate = `{
                 "token": {
                     "type": "string"
                 },
-                "user_id": {
+                "userid": {
                     "type": "integer"
                 }
             }

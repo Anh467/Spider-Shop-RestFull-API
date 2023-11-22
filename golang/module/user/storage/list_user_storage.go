@@ -12,9 +12,10 @@ func (s *sqlserverStore) ListUserStorage(c context.Context, paging common.Paging
 	// declare
 	var userList []entities.UserGet
 	// get user
-	if err := s.aptx.GormDB.Offset(paging.GetOffset()).
+	if err := s.aptx.GormDB.
+		Offset(paging.GetOffset()).
 		Limit(paging.GetLimit()).
-		Find(&userList); err != nil {
+		Find(&userList).Error; err != nil {
 		panic(err)
 	}
 	// check list exist

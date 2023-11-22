@@ -27,8 +27,10 @@ func V1Router(r *gin.Engine, aptx *common.AppConext) {
 					"test": "pinghhhhhhhhhhhhh",
 				})
 			})
-			// user
+			// authen
 			getAuthenRouters(v1, aptx)
+			// users
+			getUserRouters(v1, aptx)
 		}
 	}
 }

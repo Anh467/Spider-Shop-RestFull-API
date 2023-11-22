@@ -10,6 +10,6 @@ type UserCreate struct {
 	Birth    string `json:"birth" gorm:"column:Birth"`
 }
 
-func (UserCreate) TableModel() string {
+func (UserCreate) TableName() string {
 	return USER_TABLE
 }

@@ -13,11 +13,11 @@ import (
 // ListUsers godoc
 // @Summary      post users
 // @Description  user can able create new account
-// @Tags         users
+// @Tags         authen
 // @Accept       json
 // @Produce      json
-// @Param        user body  entity.UserCreate  true "User object that needs to be added"
-// @Success      201  {object}   entity.UserJWTModel
+// @Param        user body  entities.UserCreate  true "User object that needs to be added"
+// @Success      201  {object}   entities.UserJWTModel
 // @Failure      400  {string} biz.USER_ERR_CANNOT_CREATE
 // @Failure      409  {string} biz.USER_ERR_CANNOT_CREATE
 // @Failure      501  {string} biz.USER_ERR_CANNOT_CREATE

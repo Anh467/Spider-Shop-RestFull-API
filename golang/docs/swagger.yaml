@@ -1,6 +1,6 @@
 basePath: /api/v1
 definitions:
-  entity.UserCreate:
+  entities.UserCreate:
     properties:
       account:
         type: string
@@ -14,10 +14,39 @@ definitions:
         type: string
       password:
         type: string
-      user_id:
+      userid:
         type: integer
     type: object
-  entity.UserJWTModel:
+  entities.UserGet:
+    properties:
+      account:
+        type: string
+      birth:
+        type: string
+      created_at:
+        type: string
+      expenditure:
+        type: string
+      gender:
+        type: string
+      image:
+        type: string
+      mail:
+        type: string
+      name:
+        type: string
+      numorder:
+        type: integer
+      phone:
+        type: string
+      role:
+        type: string
+      updated_at:
+        type: string
+      userid:
+        type: integer
+    type: object
+  entities.UserJWTModel:
     properties:
       account:
         type: string
@@ -31,7 +60,7 @@ definitions:
         type: string
       token:
         type: string
-      user_id:
+      userid:
         type: integer
     type: object
 host: localhost:8080
@@ -41,7 +70,7 @@ info:
   title: SpiderShop-Restfull-API yeah
   version: "1.0"
 paths:
-  /users:
+  /register:
     post:
       consumes:
       - application/json
@@ -52,14 +81,14 @@ paths:
         name: user
         required: true
         schema:
-          $ref: '#/definitions/entity.UserCreate'
+          $ref: '#/definitions/entities.UserCreate'
       produces:
       - application/json
       responses:
         "201":
           description: Created
           schema:
-            $ref: '#/definitions/entity.UserJWTModel'
+            $ref: '#/definitions/entities.UserJWTModel'
         "400":
           description: Bad Request
           schema:
@@ -73,6 +102,36 @@ paths:
           schema:
             type: string
       summary: post users
+      tags:
+      - authen
+  /users:
+    get:
+      consumes:
+      - application/json
+      description: this function must have permission administrator
+      parameters:
+      - description: Limit the number of users to return
+        in: query
+        name: limit
+        type: integer
+      - description: Offset the list of users
+        in: query
+        name: offset
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/entities.UserGet'
+            type: array
+        "404":
+          description: Not Found
+          schema:
+            type: string
+      summary: get users
       tags:
       - users
 swagger: "2.0"
