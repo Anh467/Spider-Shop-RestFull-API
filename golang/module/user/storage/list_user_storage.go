@@ -3,14 +3,14 @@ package storage
 import (
 	"SpiderShop-Restfull-API/common"
 	"SpiderShop-Restfull-API/module/user/biz"
-	"SpiderShop-Restfull-API/module/user/entity"
+	"SpiderShop-Restfull-API/module/user/entities"
 	"context"
 	"net/http"
 )
 
-func (s *sqlserverStore) ListUserStorage(c context.Context, paging common.Paging) []entity.UserGet {
+func (s *sqlserverStore) ListUserStorage(c context.Context, paging common.Paging) []entities.UserGet {
 	// declare
-	var userList []entity.UserGet
+	var userList []entities.UserGet
 	// get user
 	if err := s.aptx.GormDB.Offset(paging.GetOffset()).
 		Limit(paging.GetLimit()).

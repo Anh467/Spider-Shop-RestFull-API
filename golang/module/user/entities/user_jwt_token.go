@@ -1,4 +1,4 @@
-package entity
+package entities
 
 type UserJWTModel struct {
 	UserID  int    `json:"userid" gorm:"column:UserID;primaryKey"`

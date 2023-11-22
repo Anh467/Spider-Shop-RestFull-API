@@ -1,13 +1,13 @@
 package biz
 
 import (
-	"SpiderShop-Restfull-API/module/user/entity"
+	"SpiderShop-Restfull-API/module/user/entities"
 	"context"
 )
 
 type createStorage interface {
 	//storage function
-	CreateUserStorage(c context.Context, userCreate entity.UserCreate) entity.UserJWTModel
+	CreateUserStorage(c context.Context, userCreate entities.UserCreate) entities.UserJWTModel
 }
 
 type createBiz struct {

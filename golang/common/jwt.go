@@ -1,19 +1,18 @@
 package common
 
 import (
-	"SpiderShop-Restfull-API/module/user/entity"
+	"SpiderShop-Restfull-API/module/user/entities"
 	"errors"
 	"time"
 
 	"github.com/dgrijalva/jwt-go"
 )
 
-func CreateToken(user *entity.UserCreate, JWT_SECRET_KEY string) (string, error) {
+func CreateToken(user *entities.UserCreate, JWT_SECRET_KEY string) (string, error) {
 	// create claims
 	claims := &Claims{
-		UserID:   user.UserID,
-		Account:  user.Account,
-		Password: user.Password,
+		UserID:  user.UserID,
+		Account: user.Account,
 		StandardClaims: jwt.StandardClaims{
 			ExpiresAt: time.Now().Add(time.Hour * 24).Unix(), // Hạn sử dụng JWT trong 1 ngày.
 		},

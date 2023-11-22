@@ -3,7 +3,7 @@ package transport
 import (
 	common "SpiderShop-Restfull-API/common"
 	"SpiderShop-Restfull-API/module/user/biz"
-	entity "SpiderShop-Restfull-API/module/user/entity"
+	entities "SpiderShop-Restfull-API/module/user/entities"
 	"SpiderShop-Restfull-API/module/user/storage"
 	"net/http"
 
@@ -25,7 +25,7 @@ import (
 func CreateUserTransport(aptx *common.AppConext) func(c *gin.Context) {
 	return func(c *gin.Context) {
 		// declare variable
-		var userGet entity.UserCreate
+		var userGet entities.UserCreate
 		// get body data
 		if err := c.ShouldBind(&userGet); err != nil {
 			panic(&common.ErrorHandler{

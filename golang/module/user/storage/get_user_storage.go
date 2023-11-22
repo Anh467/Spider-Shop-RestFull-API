@@ -3,7 +3,7 @@ package storage
 import (
 	"SpiderShop-Restfull-API/common"
 	"SpiderShop-Restfull-API/module/user/biz"
-	"SpiderShop-Restfull-API/module/user/entity"
+	"SpiderShop-Restfull-API/module/user/entities"
 	"context"
 	"errors"
 	"net/http"
@@ -11,9 +11,9 @@ import (
 	"gorm.io/gorm"
 )
 
-func (s *sqlserverStore) GetUserStorage(c context.Context, userid string) entity.UserGet {
+func (s *sqlserverStore) GetUserStorage(c context.Context, userid string) entities.UserGet {
 	// declare
-	var user *entity.UserGet
+	var user *entities.UserGet
 	// get user
 	if err := s.aptx.GormDB.Where("UserID = ?", userid).First(&user).Error; err != nil {
 		if errors.Is(err, gorm.ErrRecordNotFound) {

@@ -4,6 +4,7 @@ var USER_GENDER = []string{"Male", "Female", "Others"}
 
 const USER_ERR_CANNOT_CREATE = "can not create new user"
 const USER_ERR_CANNOT_GET = "User not found"
+const USER_ERR_CREDENTIAL = "User's credential wrong"
 
 // user column constraints
 // Account

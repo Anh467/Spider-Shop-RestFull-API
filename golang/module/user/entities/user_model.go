@@ -1,8 +1,9 @@
-package entity
+package entities
 
-type UserGet struct {
+type UserModel struct {
 	UserID      int    `json:"userid" gorm:"column:UserID;primaryKey"`
 	Account     string `json:"account" gorm:"column:Account"`
+	Password    string `json:"password" gorm:"column:Password"`
 	Name        string `json:"name" gorm:"column:Name"`
 	Image       string `json:"image" gorm:"column:Image"`
 	Gender      string `json:"gender" gorm:"column:Gender"`
@@ -16,6 +17,6 @@ type UserGet struct {
 	UpdatedAt   string `json:"updated_at" gorm:"column:UpdatedAt"`
 }
 
-func (UserGet) TableModel() string {
+func (UserModel) TableModel() string {
 	return USER_TABLE
 }

@@ -1,4 +1,4 @@
-package entity
+package entities
 
 // Table name
 const USER_TABLE = "User"

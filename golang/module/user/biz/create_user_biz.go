@@ -2,13 +2,13 @@ package biz
 
 import (
 	"SpiderShop-Restfull-API/common"
-	"SpiderShop-Restfull-API/module/user/entity"
+	"SpiderShop-Restfull-API/module/user/entities"
 	"context"
 	"net/http"
 	"strings"
 )
 
-func (b *createBiz) CreateUserBiz(c context.Context, userCreate entity.UserCreate) entity.UserJWTModel {
+func (b *createBiz) CreateUserBiz(c context.Context, userCreate entities.UserCreate) entities.UserJWTModel {
 	// reset UserID bc of increase of userid so it have to reset userid to default
 	userCreate.UserID = 0
 	// checking biz

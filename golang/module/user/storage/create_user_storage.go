@@ -3,7 +3,7 @@ package storage
 import (
 	"SpiderShop-Restfull-API/common"
 	"SpiderShop-Restfull-API/module/user/biz"
-	"SpiderShop-Restfull-API/module/user/entity"
+	"SpiderShop-Restfull-API/module/user/entities"
 	"context"
 	"errors"
 	"net/http"
@@ -11,14 +11,14 @@ import (
 	"gorm.io/gorm"
 )
 
-func (s *sqlserverStore) CreateUserStorage(c context.Context, userCreate entity.UserCreate) entity.UserJWTModel {
+func (s *sqlserverStore) CreateUserStorage(c context.Context, userCreate entities.UserCreate) entities.UserJWTModel {
 	// declare variables
-	userJWTModel := &entity.UserJWTModel{}
+	userJWTModel := &entities.UserJWTModel{}
 	var token string
 	var err error
 	var count int64
 	// check existing account
-	s.aptx.GormDB.Table(entity.USER_TABLE).Where("Account = ?", userCreate.Account).
+	s.aptx.GormDB.Table(entities.USER_TABLE).Where("Account = ?", userCreate.Account).
 		Count(&count)
 	if count > 0 {
 		panic(&common.ErrorHandler{
@@ -27,7 +27,7 @@ func (s *sqlserverStore) CreateUserStorage(c context.Context, userCreate entity.
 		})
 	}
 	// create
-	if err := s.aptx.GormDB.Table(entity.USER_TABLE).Create(&userCreate).Error; err != nil {
+	if err := s.aptx.GormDB.Table(entities.USER_TABLE).Create(&userCreate).Error; err != nil {
 		if errors.Is(err, gorm.ErrInvalidField) {
 			panic(&common.ErrorHandler{
 				ErrorMessage: biz.USER_ERR_CANNOT_CREATE,
