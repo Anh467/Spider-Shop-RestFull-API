@@ -11,6 +11,7 @@ type createStorage interface {
 	// authen
 	CreateUserStorage(c context.Context, userCreate entities.UserCreate) entities.UserJWTModel
 	GetUserRoleStorage(c context.Context, account string) string
+	SigninUserStorage(c context.Context, userCredential entities.UserCredential) entities.UserJWTModel
 	// users
 	ListUserStorage(c context.Context, paging common.Paging) []entities.UserGet
 }

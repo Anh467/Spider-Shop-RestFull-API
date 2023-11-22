@@ -17,6 +17,13 @@ definitions:
       userid:
         type: integer
     type: object
+  entities.UserCredential:
+    properties:
+      account:
+        type: string
+      password:
+        type: string
+    type: object
   entities.UserGet:
     properties:
       account:
@@ -70,6 +77,42 @@ info:
   title: SpiderShop-Restfull-API yeah
   version: "1.0"
 paths:
+  /asignin:
+    post:
+      consumes:
+      - application/json
+      description: Guess can sign in to have a user's right
+      parameters:
+      - description: Data of user's credentials
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/entities.UserCredential'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/entities.UserJWTModel'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+        "401":
+          description: Unauthorized
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      summary: Signin
+      tags:
+      - users
   /register:
     post:
       consumes:

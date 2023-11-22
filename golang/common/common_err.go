@@ -8,3 +8,6 @@ const TOKEN_NOT_APPROPRIATE = "Token not appropriate"
 
 // USER
 const USER_ERR_FORBIDDEN = "User don't have permission"
+
+// authen
+const AUTHEN_ERR_SIGN_REQUEST_BODY = "Request body wrong format"

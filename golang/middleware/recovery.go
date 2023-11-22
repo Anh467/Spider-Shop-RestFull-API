@@ -22,12 +22,13 @@ func Recovery() gin.HandlerFunc {
 							"message": errorHandler.ErrorMessage,
 						},
 					})
+					c.Abort()
+					return
 					// simultaneously stop middleware and return
-				} else {
-					c.JSON(http.StatusInternalServerError, gin.H{
-						"Error": err,
-					})
 				}
+				c.JSON(http.StatusInternalServerError, gin.H{
+					"Error": err,
+				})
 				c.Abort()
 				return
 			}

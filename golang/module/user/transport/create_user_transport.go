@@ -10,7 +10,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// ListUsers godoc
+// CreateUsers godoc
 // @Summary      post users
 // @Description  user can able create new account
 // @Tags         authen
