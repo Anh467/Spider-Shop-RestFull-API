@@ -3,6 +3,7 @@ package biz
 var USER_GENDER = []string{"Male", "Female", "Others"}
 
 const USER_ERR_CANNOT_CREATE = "can not create new user"
+const USER_ERR_CANNOT_GET = "User not found"
 
 // user column constraints
 // Account

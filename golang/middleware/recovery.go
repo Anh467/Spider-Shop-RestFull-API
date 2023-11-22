@@ -24,7 +24,7 @@ func Recovery() gin.HandlerFunc {
 					})
 					// simultaneously stop middleware and return
 				} else {
-					c.JSON(http.StatusBadRequest, gin.H{
+					c.JSON(http.StatusInternalServerError, gin.H{
 						"Error": err,
 					})
 				}
