@@ -1,7 +1,6 @@
 package entity
 
 type UserUpdate struct {
-	Account  string `json:"account" gorm:"column:Account"`
 	Password string `json:"password" gorm:"column:Password"`
 	Name     string `json:"name" gorm:"column:Name"`
 	Image    string `json:"image" gorm:"column:Image"`
