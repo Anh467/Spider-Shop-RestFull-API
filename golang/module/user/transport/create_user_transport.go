@@ -21,7 +21,7 @@ import (
 // @Failure      400  {string} biz.USER_ERR_CANNOT_CREATE
 // @Failure      409  {string} biz.USER_ERR_CANNOT_CREATE
 // @Failure      501  {string} biz.USER_ERR_CANNOT_CREATE
-// @Router       /register [POST]
+// @Router       /authen/register [POST]
 func CreateUserTransport(aptx *common.AppConext) func(c *gin.Context) {
 	return func(c *gin.Context) {
 		// declare variable

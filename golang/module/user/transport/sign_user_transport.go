@@ -13,7 +13,7 @@ import (
 // Signin godoc
 // @Summary      Signin
 // @Description  Guess can sign in to have a user's right
-// @Tags         users
+// @Tags         authen
 // @Accept       json
 // @Produce      json
 // @Param        user body  entities.UserCredential  true "Data of user's credentials"
@@ -21,7 +21,7 @@ import (
 // @Failure      400  {string}   http.StatusBadRequest
 // @Failure      401  {string}   http.StatusUnauthorized
 // @Failure      500  {string}   http.StatusInternalServerError
-// @Router       /asignin [post]
+// @Router       /authen/signin [post]
 func SigninUserTransport(aptx *common.AppConext) func(c *gin.Context) {
 	return func(c *gin.Context) {
 		// declare
