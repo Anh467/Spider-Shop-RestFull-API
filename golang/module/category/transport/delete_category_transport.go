@@ -11,9 +11,9 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// CreateCategory godoc
-// @Summary      post Categories
-// @Description  user can able create new account
+// DeleteCategory godoc
+// @Summary      delete a Category
+// @Description  user can able delete a category based one cateid and you must have rights admin to delete
 // @Tags         categories
 // @Accept       json
 // @Produce      json

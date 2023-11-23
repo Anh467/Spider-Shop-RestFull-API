@@ -11,8 +11,8 @@ import (
 )
 
 // CreateCategory godoc
-// @Summary      post Categories
-// @Description  user can able create new account
+// @Summary      post a Category
+// @Description  user can able create new categories
 // @Tags         categories
 // @Accept       json
 // @Produce      json
