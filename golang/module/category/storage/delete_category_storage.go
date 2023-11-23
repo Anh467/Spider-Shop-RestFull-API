@@ -8,7 +8,7 @@ import (
 	"net/http"
 )
 
-func (s *mySQLStore) DeleteCategoryStorage(c context.Context, cateid string) *entities.CateGet {
+func (s *mySQLStore) DeleteCategoryStorage(c context.Context, cateid int) *entities.CateGet {
 	// Declare
 	var status string
 	var cateGet *entities.CateGet

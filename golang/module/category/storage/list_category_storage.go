@@ -6,7 +6,7 @@ import (
 	"context"
 )
 
-func (s *mySQLStore) ListCategoryStorage(c context.Context, paging common.Paging, options ...string) []entities.CateGet {
+func (s *mySQLStore) ListCategoryStorage(c context.Context, paging common.Paging, options []string) []entities.CateGet {
 	// declare
 	var categories []entities.CateGet
 	var query = s.aptx.GormDB
