@@ -11,7 +11,7 @@ import (
 	"gorm.io/gorm"
 )
 
-func (s *sqlserverStore) CreateUserStorage(c context.Context, userCreate entities.UserCreate) entities.UserJWTModel {
+func (s *mySQLStore) CreateUserStorage(c context.Context, userCreate entities.UserCreate) entities.UserJWTModel {
 	// declare variables
 	userJWTModel := &entities.UserJWTModel{}
 	var token string

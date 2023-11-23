@@ -2,7 +2,7 @@ package storage
 
 import "context"
 
-func (s *sqlserverStore) GetUserRoleStorage(c context.Context, account string) string {
+func (s *mySQLStore) GetUserRoleStorage(c context.Context, account string) string {
 	// declare
 	var role string
 	// get role column

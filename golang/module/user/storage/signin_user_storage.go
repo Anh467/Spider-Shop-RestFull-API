@@ -11,7 +11,7 @@ import (
 	"gorm.io/gorm"
 )
 
-func (s *sqlserverStore) SigninUserStorage(c context.Context, userCredential entities.UserCredential) entities.UserJWTModel {
+func (s *mySQLStore) SigninUserStorage(c context.Context, userCredential entities.UserCredential) entities.UserJWTModel {
 	// declare
 	var userJWTModel entities.UserJWTModel
 	var err error

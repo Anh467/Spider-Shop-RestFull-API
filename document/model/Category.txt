@@ -2,7 +2,8 @@ Cate: "this is table contain category of animal like spider, frog, ant, ... "
 
 CateID: {
 	Type: int,
-	Constraint: auto increasement, unique, not null,
+	Constraint: auto increasement, unique, not null, 
+	condition: CateID must be 0 before insert
 }
 
 Name: {

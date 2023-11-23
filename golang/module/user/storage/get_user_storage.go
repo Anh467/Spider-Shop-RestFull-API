@@ -11,7 +11,7 @@ import (
 	"gorm.io/gorm"
 )
 
-func (s *sqlserverStore) GetUserStorage(c context.Context, userid string) entities.UserGet {
+func (s *mySQLStore) GetUserStorage(c context.Context, userid string) entities.UserGet {
 	// declare
 	var user *entities.UserGet
 	// get user

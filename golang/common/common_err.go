@@ -1,5 +1,8 @@
 package common
 
+//global
+const GLOBAL_UNDEFIND_ERR = `the error not defined`
+
 // regex
 const EMAIL_REGEX = `^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$`
 

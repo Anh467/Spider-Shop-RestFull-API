@@ -8,7 +8,7 @@ import (
 	"net/http"
 )
 
-func (s *sqlserverStore) ListUserStorage(c context.Context, paging common.Paging) []entities.UserGet {
+func (s *mySQLStore) ListUserStorage(c context.Context, paging common.Paging) []entities.UserGet {
 	// declare
 	var userList []entities.UserGet
 	// get user
