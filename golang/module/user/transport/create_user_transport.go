@@ -30,7 +30,7 @@ func CreateUserTransport(aptx *common.AppConext) func(c *gin.Context) {
 		if err := c.ShouldBind(&userGet); err != nil {
 			panic(&common.ErrorHandler{
 				ErrorCode:    http.StatusBadRequest,
-				ErrorMessage: "Binding data from database failed",
+				ErrorMessage: common.GLOBAL_BINDING_DATA_FAIL,
 			})
 		}
 		// Dependency
