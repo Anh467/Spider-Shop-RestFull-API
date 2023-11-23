@@ -28,7 +28,7 @@ func CheckRole(aptx *common.AppConext, role ...string) gin.HandlerFunc {
 		store := storage.NewMySQLStorage(aptx)
 		business := biz.NewCreateBiz(store)
 		// get role according account
-		roleUser = business.GetUserRoleBiz(c, claims.Account)
+		roleUser = business.GetUserRoleBiz(c.Request.Context(), claims.Account)
 		// check in
 		for _, ele := range role {
 			if ele == roleUser {

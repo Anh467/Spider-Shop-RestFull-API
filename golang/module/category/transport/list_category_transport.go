@@ -19,10 +19,10 @@ import (
 // @Param        limit query int false "Limit the number of users to return"
 // @Param        offset query int false "Offset the list of users"
 // @Success      200  {object} entities.CateGet
-// @Failure      400  {string}
+// @Failure      400  {string} http.StatusBadRequest
 // @Failure      500  {string} common.GLOBAL_UNDEFIND_ERR
 // @Router       /categories [GET]
-func GetCategoryTransport(aptx *common.AppConext) func(c *gin.Context) {
+func ListCategoryTransport(aptx *common.AppConext) func(c *gin.Context) {
 	return func(c *gin.Context) {
 		// declare
 		var paging common.Paging

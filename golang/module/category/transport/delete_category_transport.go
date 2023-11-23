@@ -19,7 +19,7 @@ import (
 // @Produce      json
 // @Param 		 cateid path int required "Enter appropriate cateid"
 // @Success      201  {object} entities.CateGet
-// @Success      204  {string}
+// @Success      204  {string} http.StatusNoContent
 // @Failure      400  {string} common.GLOBAL_BINDING_DATA_FAIL
 // @Failure      400  {string} common.GLOBAL_WRONG_FORMAT_INTERGER
 // @Failure      500  {string} common.GLOBAL_UNDEFIND_ERR

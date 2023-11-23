@@ -21,6 +21,7 @@ import (
 // @Failure      400  {string} common.GLOBAL_BINDING_DATA_FAIL
 // @Failure      500  {string} common.GLOBAL_UNDEFIND_ERR
 // @Router       /categories [POST]
+
 func CreateCategoryTransport(aptx *common.AppConext) func(c *gin.Context) {
 	return func(c *gin.Context) {
 		// declare

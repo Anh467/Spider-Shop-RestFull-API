@@ -11,7 +11,7 @@ import (
 func (s *mySQLStore) DeleteCategoryStorage(c context.Context, cateid int) *entities.CateGet {
 	// Declare
 	var status string
-	var cateGet *entities.CateGet
+	cateGet := entities.CateGet{}
 	// get status of that category
 	if err := s.aptx.GormDB.
 		Table(entities.CATE_TABLE).
@@ -23,7 +23,7 @@ func (s *mySQLStore) DeleteCategoryStorage(c context.Context, cateid int) *entit
 	if status == "" {
 		panic(&common.ErrorHandler{
 			ErrorCode:    http.StatusNotFound,
-			ErrorMessage: biz.CATE_ERR_CateID_UNIQUE,
+			ErrorMessage: biz.CATE_ERR_CateID_EXIST,
 		})
 	}
 	// check if is Hot or Normal, turn it into Deleted (soft deletes)
@@ -39,7 +39,7 @@ func (s *mySQLStore) DeleteCategoryStorage(c context.Context, cateid int) *entit
 		if tx.RowsAffected == 0 {
 			panic(biz.CATE_ERR_TABLE_NO_CHANGE)
 		}
-		return cateGet
+		return &cateGet
 	}
 
 	// check if is Deleted, delete it in table (hard deletes)

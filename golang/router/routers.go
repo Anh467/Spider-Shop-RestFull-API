@@ -31,6 +31,8 @@ func V1Router(r *gin.Engine, aptx *common.AppConext) {
 			getAuthenRouters(v1, aptx)
 			// users
 			getUserRouters(v1, aptx)
+			// categories
+			getCategoryRouters(v1, aptx)
 		}
 	}
 }

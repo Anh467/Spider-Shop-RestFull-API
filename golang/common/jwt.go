@@ -27,9 +27,11 @@ func CreateToken(user *entities.UserCreate, JWT_SECRET_KEY string) (string, erro
 }
 
 func PraseToken(tokenString string, JWT_SECRET_KEY string) (*Claims, error) {
+	// turn into slice of bytes
+	secretKey := []byte(JWT_SECRET_KEY)
 	// Parse token từ chuỗi tokenString.
 	token, err := jwt.ParseWithClaims(tokenString, &Claims{}, func(token *jwt.Token) (interface{}, error) {
-		return JWT_SECRET_KEY, nil
+		return secretKey, nil
 	})
 	if err != nil {
 		return nil, err

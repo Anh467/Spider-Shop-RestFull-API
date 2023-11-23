@@ -11,7 +11,7 @@ func (s *mySQLStore) GetCategoryStorage(c context.Context, cateid int) entities.
 	// get first category
 	if err := s.aptx.GormDB.
 		Where("CateID = ?", cateid).
-		First(&cateGet); err != nil {
+		First(&cateGet).Error; err != nil {
 		panic(err)
 	}
 	// return

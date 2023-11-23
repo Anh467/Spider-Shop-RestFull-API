@@ -1,5 +1,44 @@
 basePath: /api/v1
 definitions:
+  entities.CateCreate:
+    properties:
+      desc:
+        type: string
+      image:
+        type: string
+      name:
+        type: string
+    type: object
+  entities.CateGet:
+    properties:
+      cateid:
+        type: integer
+      desc:
+        type: string
+      image:
+        type: string
+      name:
+        type: string
+      numorder:
+        type: integer
+      numwarehouse:
+        type: integer
+      revenue:
+        type: integer
+      status:
+        type: string
+    type: object
+  entities.CateUpdate:
+    properties:
+      desc:
+        type: string
+      image:
+        type: string
+      name:
+        type: string
+      status:
+        type: string
+    type: object
   entities.UserCreate:
     properties:
       account:
@@ -147,6 +186,169 @@ paths:
       summary: Signin
       tags:
       - authen
+  /categories:
+    get:
+      consumes:
+      - application/json
+      description: user can get list of categories
+      parameters:
+      - description: Limit the number of users to return
+        in: query
+        name: limit
+        type: integer
+      - description: Offset the list of users
+        in: query
+        name: offset
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/entities.CateGet'
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      summary: list categories
+      tags:
+      - categories
+    post:
+      consumes:
+      - application/json
+      description: user can able create new categories
+      parameters:
+      - description: Category's information which needs to be add
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/entities.CateCreate'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/entities.CateGet'
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      summary: post a Category
+      tags:
+      - categories
+  /categories/:cateid:
+    get:
+      consumes:
+      - application/json
+      description: user can able get a specific category
+      parameters:
+      - description: Enter appropriate cateid
+        in: path
+        name: cateid
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/entities.CateGet'
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      summary: get a category
+      tags:
+      - categories
+  /categories/:userid:
+    delete:
+      consumes:
+      - application/json
+      description: user can able delete a category based one cateid and you must have
+        rights admin to delete
+      parameters:
+      - description: Enter appropriate cateid
+        in: path
+        name: cateid
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/entities.CateGet'
+        "204":
+          description: No Content
+          schema:
+            type: string
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      summary: delete a Category
+      tags:
+      - categories
+    put:
+      consumes:
+      - application/json
+      description: user can able Update a category based one cateid and you must have
+        rights admin to Update
+      parameters:
+      - description: Enter appropriate cateid
+        in: path
+        name: cateid
+        required: true
+        type: integer
+      - description: Category's information which needs to be add
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/entities.CateUpdate'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/entities.CateGet'
+        "204":
+          description: No Content
+          schema:
+            type: string
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      summary: Update a Category
+      tags:
+      - categories
   /users:
     get:
       consumes:
