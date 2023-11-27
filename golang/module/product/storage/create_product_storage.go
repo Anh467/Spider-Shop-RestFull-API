@@ -11,7 +11,7 @@ import (
 	"github.com/jinzhu/gorm"
 )
 
-func (s *mySQLStore) CreateCategoryStorage(ctx context.Context, productCreate entities.ProductCreate) *entities.ProductGet {
+func (s *mySQLStore) CreateProductStorage(ctx context.Context, productCreate entities.ProductCreate) *entities.ProductGet {
 	// declare
 	var count int64
 	productGet := &entities.ProductGet{

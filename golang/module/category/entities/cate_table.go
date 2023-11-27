@@ -3,6 +3,8 @@ package entities
 // Table name
 const CATE_TABLE = "Cate"
 
+var CATE_STATUS = []string{"Normal", "Hot", "Deleted"}
+
 // column name
 const USER_TABLE_CateID = "CateID"
 const USER_TABLE_Name = "Name"

@@ -2,17 +2,17 @@ package biz
 
 import (
 	"SpiderShop-Restfull-API/common"
-	"SpiderShop-Restfull-API/module/category/entities"
+	"SpiderShop-Restfull-API/module/product/entities"
 	"context"
 )
 
 type createStorage interface {
 	//storage function
-	CreateCategoryStorage(c context.Context, category entities.CateCreate) entities.CateGet
-	DeleteCategoryStorage(c context.Context, cateid int) *entities.CateGet
-	GetCategoryStorage(c context.Context, cateid int) entities.CateGet
-	ListCategoryStorage(c context.Context, paging common.Paging, options []string) []entities.CateGet
-	UpdateCategoryStorage(c context.Context, cateUpdate entities.CateUpdate, cateid int) *entities.CateGet
+	CreateProductStorage(ctx context.Context, productCreate entities.ProductCreate) *entities.ProductGet
+	DeleteProductStorage(ctx context.Context, productid int) *entities.ProductGet
+	GetProductStorage(c context.Context, flag bool, productid int) *entities.ProductGet
+	ListProductStorage(c context.Context, flag bool, paging common.Paging, options []string) *[]entities.ProductGet
+	UpdateProductStorage(ctx context.Context, productUpdate entities.ProductUpdate, productid int) *entities.ProductGet
 }
 
 type createBiz struct {
