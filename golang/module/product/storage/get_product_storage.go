@@ -17,14 +17,14 @@ func (s *mySQLStore) GetProductStorage(c context.Context, flag bool, productid i
 	var count int64
 	// find first product
 	if err := s.aptx.GormDB.Where("ProductID = ?", productid).
+		Count(&count).
+		First(&productget).
 		Preload(entities_category.CATE_TABLE, func(db *gorm.DB) *gorm.DB {
 			return db.Select(entities_category.USER_TABLE_CateID,
 				entities_category.USER_TABLE_Name,
 				entities_category.USER_TABLE_Desc,
 				entities_category.USER_TABLE_Status)
 		}).
-		Count(&count).
-		First(&productget).
 		Error; err != nil {
 		panic(err)
 	}
