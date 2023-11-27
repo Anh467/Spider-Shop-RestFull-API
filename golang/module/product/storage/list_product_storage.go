@@ -5,6 +5,8 @@ import (
 	entities_category "SpiderShop-Restfull-API/module/category/entities"
 	"SpiderShop-Restfull-API/module/product/entities"
 	"context"
+
+	"github.com/jinzhu/gorm"
 )
 
 func (s *mySQLStore) ListProductStorage(c context.Context, flag bool, paging common.Paging, options []string) *[]entities.ProductGet {
@@ -36,6 +38,12 @@ func (s *mySQLStore) ListProductStorage(c context.Context, flag bool, paging com
 	if err := query.
 		Offset(paging.GetOffset()).
 		Limit(paging.GetLimit()).
+		Preload(entities_category.CATE_TABLE, func(db *gorm.DB) *gorm.DB {
+			return db.Select(entities_category.USER_TABLE_CateID,
+				entities_category.USER_TABLE_Name,
+				entities_category.USER_TABLE_Desc,
+				entities_category.USER_TABLE_Status)
+		}).
 		Find(&productGets).
 		Error; err != nil {
 		panic(err)

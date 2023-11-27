@@ -9,7 +9,7 @@ type ProductModel struct {
 	Name      string                      `json:"name" gorm:"column:Name"`
 	Desc      string                      `json:"desc" gorm:"column:Desc"`
 	Image     string                      `json:"image" gorm:"column:Image"`
-	Status    string                      `json:"status" gorm:"column:Status"`
+	Status    string                      `json:"status" gorm:"column:Status;default:Normal"`
 	CreatedAt string                      `json:"createdat" gorm:"column:createdAt"`
 	UpdatedAt string                      `json:"updatedat" gorm:"column:updatedAt"`
 }

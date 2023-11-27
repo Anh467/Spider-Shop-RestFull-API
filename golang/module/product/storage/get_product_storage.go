@@ -31,7 +31,7 @@ func (s *mySQLStore) GetProductStorage(c context.Context, flag bool, productid i
 	// check product is exist or not
 	if count == 0 {
 		panic(&common.ErrorHandler{
-			ErrorCode:    http.StatusBadRequest,
+			ErrorCode:    http.StatusNotFound,
 			ErrorMessage: biz.PRODUCT_ERR_PRODUCT_ID_NOT_EXIST,
 		})
 	}
