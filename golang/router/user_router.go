@@ -13,7 +13,7 @@ func getUserRouters(v1 *gin.RouterGroup, aptx *common.AppConext) {
 	user := v1.Group("/users")
 	{
 		user.GET("/",
-			middleware.CheckRole(aptx, entities.USER_TABLE_Role_ADMIN),
+			middleware.CheckPermission(aptx, entities.USER_TABLE_Role_ADMIN),
 			transport.ListUserTrasnport(aptx))
 	}
 }

@@ -9,7 +9,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func CheckRole(aptx *common.AppConext, role ...string) gin.HandlerFunc {
+func CheckPermission(aptx *common.AppConext, role ...string) gin.HandlerFunc {
 	return func(c *gin.Context) {
 		// declare
 		var roleUser string
@@ -37,7 +37,12 @@ func CheckRole(aptx *common.AppConext, role ...string) gin.HandlerFunc {
 			}
 		}
 		// check permission
-		c.Set("flag", flag)
+		if !flag {
+			panic(&common.ErrorHandler{
+				ErrorCode:    http.StatusForbidden,
+				ErrorMessage: common.USER_ERR_FORBIDDEN,
+			})
+		}
 		// go next middleware
 		c.Next()
 	}
