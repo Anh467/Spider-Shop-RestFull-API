@@ -10,7 +10,7 @@ import (
 )
 
 func getProductRouters(v1 *gin.RouterGroup, aptx *common.AppConext) {
-	user := v1.Group("/categories")
+	user := v1.Group("/products")
 	{
 		// get a product
 		user.GET("/",
