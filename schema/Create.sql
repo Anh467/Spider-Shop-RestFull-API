@@ -43,7 +43,7 @@ create table `Product`(
     constraint CHK_Status_Product check(Status in ('Normal', 'Hot', 'Deleted')),
     CONSTRAINT FK_Product_Category FOREIGN KEY (CateID) REFERENCES Cate(CateID)
 );
--- ########################### dbo.Tracking ###########################
+-- ###############	############ dbo.Tracking ###########################
 alter table User
 drop index idx_UserID_User;
 -- $$$$$$$$$$$$$$$$$$$$$$$$$$$ dbo.User $$$$$$$$$$$$$$$$$$$$$$$$$$$
@@ -52,5 +52,8 @@ add index idx_Account_User(Account);
 -- $$$$$$$$$$$$$$$$$$$$$$$$$$$ dbo.Cate $$$$$$$$$$$$$$$$$$$$$$$$$$$
 alter table Cate
 add CONSTRAINT CHK_Status CHECK (Status IN ('Normal', 'Hot', 'Deleted'));
+alter table Cate
+add index idx_Status_User(Status);
 -- $$$$$$$$$$$$$$$$$$$$$$$$$$$ dbo.Product $$$$$$$$$$$$$$$$$$$$$$$$$$$
- 
+alter table Product
+add index idx_Status_User(Status);
