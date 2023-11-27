@@ -23,7 +23,7 @@ func GetProductTransport(aptx *common.AppConext) func(c *gin.Context) {
 		flag = c.GetBool("flag")
 
 		// get query parameters url
-		productidStr, _ := c.Params.Get("cateid")
+		productidStr, _ := c.Params.Get("productid")
 		if productid, err = strconv.Atoi(productidStr); err != nil {
 			panic(&common.ErrorHandler{
 				ErrorCode:    http.StatusBadRequest,
