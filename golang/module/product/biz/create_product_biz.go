@@ -9,6 +9,8 @@ import (
 )
 
 func (b *createBiz) CreateProductBiz(ctx context.Context, productCreate entities.ProductCreate) *entities.ProductGet {
+	// ProductID
+	productCreate.ProductID = 0
 	// CateID int    `json:"cateid" gorm:"column:CateID"`
 	if productCreate.CateID < 0 {
 		panic(&common.ErrorHandler{

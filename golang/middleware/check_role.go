@@ -4,7 +4,6 @@ import (
 	"SpiderShop-Restfull-API/common"
 	"SpiderShop-Restfull-API/module/user/biz"
 	"SpiderShop-Restfull-API/module/user/storage"
-	"net/http"
 
 	"github.com/gin-gonic/gin"
 )
@@ -19,10 +18,11 @@ func CheckRole(aptx *common.AppConext, role ...string) gin.HandlerFunc {
 		// parse to claims
 		claims, err := common.PraseToken(token, aptx.SuperSecretKey)
 		if err != nil {
-			panic(&common.ErrorHandler{
-				ErrorMessage: err.Error(),
-				ErrorCode:    http.StatusUnauthorized,
-			})
+			// check permission
+			c.Set("flag", flag)
+			// go next middleware
+			c.Next()
+			return
 		}
 		// dependencies
 		store := storage.NewMySQLStorage(aptx)

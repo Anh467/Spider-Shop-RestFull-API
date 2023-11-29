@@ -7,26 +7,18 @@ import (
 	"SpiderShop-Restfull-API/module/product/entities"
 	"context"
 	"net/http"
-
-	"github.com/jinzhu/gorm"
 )
 
 func (s *mySQLStore) CreateProductStorage(ctx context.Context, productCreate entities.ProductCreate) *entities.ProductGet {
 	// declare
 	var count int64
-	productGet := &entities.ProductGet{
-		CateID: productCreate.CateID,
-		Name:   productCreate.Name,
-		Desc:   productCreate.Desc,
-		Image:  productCreate.Image,
-		Status: productCreate.Status,
-	}
+	var productGet *entities.ProductGet
 	// check the existence of cateid
 	if err := s.aptx.GormDB.
 		Table(entities_category.CATE_TABLE).
-		Where("CateID = ?", productGet.CateID).
-		First(nil).
-		Count(&count).
+		Where("CateID = ?", productCreate.CateID).
+		Select("CateID").
+		Scan(&count).
 		Error; err != nil {
 		panic(err)
 	}
@@ -38,13 +30,18 @@ func (s *mySQLStore) CreateProductStorage(ctx context.Context, productCreate ent
 	}
 	// create product
 	if err := s.aptx.GormDB.
-		Create(&productGet).
-		Preload(entities_category.CATE_TABLE, func(db *gorm.DB) *gorm.DB {
-			return db.Select(entities_category.USER_TABLE_CateID,
-				entities_category.USER_TABLE_Name,
-				entities_category.USER_TABLE_Desc,
-				entities_category.USER_TABLE_Status)
-		}).Error; err != nil {
+		Create(&productCreate).
+		Error; err != nil {
+		panic(err)
+	}
+	// get product
+	if err := s.aptx.GormDB.
+		Select(entities.USER_TABLE_ProductID, entities.USER_TABLE_CateID, entities.USER_TABLE_Name,
+			entities.USER_TABLE_Desc, entities.USER_TABLE_Image, entities.USER_TABLE_Status,
+			entities.USER_TABLE_CreatedAt, entities.USER_TABLE_UpdatedAt).
+		Where("ProductID = ?", productCreate.ProductID).
+		Preload(entities_category.CATE_TABLE).
+		First(&productGet).Error; err != nil {
 		panic(err)
 	}
 	// return

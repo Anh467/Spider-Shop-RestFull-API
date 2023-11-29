@@ -2,6 +2,7 @@ package entities
 
 // Table name
 const CATE_TABLE = "Cate"
+const CATES_TABLE = "Cates"
 
 var CATE_STATUS = []string{"Normal", "Hot", "Deleted"}
 

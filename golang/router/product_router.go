@@ -18,17 +18,17 @@ func getProductRouters(v1 *gin.RouterGroup, aptx *common.AppConext) {
 			transport.ListProductTransport(aptx))
 
 		// get list products
-		user.GET("/:cateid",
+		user.GET("/:productid",
 			middleware.CheckRole(aptx, entities.USER_TABLE_Role_ADMIN),
 			transport.GetProductTransport(aptx))
 
 		// delete a product
-		user.DELETE("/:cateid",
+		user.DELETE("/:productid",
 			middleware.CheckPermission(aptx, entities.USER_TABLE_Role_ADMIN),
 			transport.DeleteProductTransport(aptx))
 
 		// update a product
-		user.PUT("/:cateid",
+		user.PUT("/:productid",
 			middleware.CheckPermission(aptx, entities.USER_TABLE_Role_ADMIN),
 			transport.UpdateProductTransport(aptx))
 

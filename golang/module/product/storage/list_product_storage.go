@@ -5,15 +5,13 @@ import (
 	entities_category "SpiderShop-Restfull-API/module/category/entities"
 	"SpiderShop-Restfull-API/module/product/entities"
 	"context"
-
-	"github.com/jinzhu/gorm"
 )
 
 func (s *mySQLStore) ListProductStorage(c context.Context, flag bool, paging common.Paging, options []string) *[]entities.ProductGet {
 	// declare product
 	var cateidsDeleted []string
 	var productGets *[]entities.ProductGet
-	query := s.aptx.GormDB
+	var query = s.aptx.GormDB
 	// get list deleted cateidsDeleted
 	if !flag {
 		if err := s.aptx.GormDB.
@@ -26,26 +24,16 @@ func (s *mySQLStore) ListProductStorage(c context.Context, flag bool, paging com
 	}
 	// init options
 	for _, option := range options {
-		query.Where(option)
+		query = query.Where(option)
 	}
 	// add conditions user have a rights to access deleted products or not
 	if !flag {
-		query.
+		query = query.
 			Not("CateID in ?", cateidsDeleted).
 			Not("Status = ?", entities.PRODUCT_TABLE_Status_Deleted)
 	}
 	// get products
-	if err := query.
-		Offset(paging.GetOffset()).
-		Limit(paging.GetLimit()).
-		Find(&productGets).
-		Preload(entities_category.CATE_TABLE, func(db *gorm.DB) *gorm.DB {
-			return db.Select(entities_category.USER_TABLE_CateID,
-				entities_category.USER_TABLE_Name,
-				entities_category.USER_TABLE_Desc,
-				entities_category.USER_TABLE_Status)
-		}).
-		Error; err != nil {
+	if err := query.Preload("Cate").Find(&productGets).Error; err != nil {
 		panic(err)
 	}
 	// return

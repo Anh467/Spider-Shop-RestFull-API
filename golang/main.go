@@ -13,6 +13,7 @@ import (
 
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
+	"gorm.io/gorm/logger"
 )
 
 const FILE_CONTEXT = "config.json"
@@ -81,7 +82,9 @@ func ConnectSqlServerGorm(MySQL common.MySQL) (*gorm.DB, error) {
 	var db *gorm.DB
 	var err error
 	// connect to database
-	if db, err = gorm.Open(mysql.Open(connString), &gorm.Config{}); err != nil {
+	if db, err = gorm.Open(mysql.Open(connString), &gorm.Config{
+		Logger: logger.Default.LogMode(logger.Info),
+	}); err != nil {
 		// getting error and handle it
 		fmt.Println("Connecting my sql server failure")
 		return nil, err
