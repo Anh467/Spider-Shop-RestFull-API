@@ -10,19 +10,19 @@ import (
 )
 
 func getCategoryRouters(v1 *gin.RouterGroup, aptx *common.AppConext) {
-	user := v1.Group("/categories")
+	category := v1.Group("/categories")
 	{
-		user.GET("/",
+		category.GET("/",
 			transport.ListCategoryTransport(aptx))
-		user.GET("/:cateid",
+		category.GET("/:cateid",
 			transport.GetCategoryTransport(aptx))
-		user.DELETE("/:cateid",
+		category.DELETE("/:cateid",
 			middleware.CheckPermission(aptx, entities.USER_TABLE_Role_ADMIN),
 			transport.DeleteCategoryTransport(aptx))
-		user.PUT("/:cateid",
+		category.PUT("/:cateid",
 			middleware.CheckPermission(aptx, entities.USER_TABLE_Role_ADMIN),
 			transport.UpdateCategoryTransport(aptx))
-		user.POST("/",
+		category.POST("/",
 			middleware.CheckPermission(aptx, entities.USER_TABLE_Role_ADMIN),
 			transport.CreateCategoryTransport(aptx))
 	}

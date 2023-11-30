@@ -10,30 +10,38 @@ import (
 )
 
 func getProductRouters(v1 *gin.RouterGroup, aptx *common.AppConext) {
-	user := v1.Group("/products")
+	product := v1.Group("/products")
 	{
+		// inner product
+		category := product.Group("/categories")
+		{
+			category.GET("/:cateid",
+				middleware.CheckRole(aptx, entities.USER_TABLE_Role_ADMIN),
+				transport.ListProductAccordingCateidTransport(aptx),
+			)
+		}
 		// get a product
-		user.GET("/",
+		product.GET("/",
 			middleware.CheckRole(aptx, entities.USER_TABLE_Role_ADMIN),
 			transport.ListProductTransport(aptx))
 
 		// get list products
-		user.GET("/:productid",
+		product.GET("/:productid",
 			middleware.CheckRole(aptx, entities.USER_TABLE_Role_ADMIN),
 			transport.GetProductTransport(aptx))
 
 		// delete a product
-		user.DELETE("/:productid",
+		product.DELETE("/:productid",
 			middleware.CheckPermission(aptx, entities.USER_TABLE_Role_ADMIN),
 			transport.DeleteProductTransport(aptx))
 
 		// update a product
-		user.PUT("/:productid",
+		product.PUT("/:productid",
 			middleware.CheckPermission(aptx, entities.USER_TABLE_Role_ADMIN),
 			transport.UpdateProductTransport(aptx))
 
 		// create a product
-		user.POST("/",
+		product.POST("/",
 			middleware.CheckPermission(aptx, entities.USER_TABLE_Role_ADMIN),
 			transport.CreateProductTransport(aptx))
 	}
