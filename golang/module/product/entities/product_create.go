@@ -1,7 +1,7 @@
 package entities
 
 type ProductCreate struct {
-	ProductID int    `json:"productid" gorm:"column:ProductID;primaryKey"`
+	ProductID int    `json:"productid" gorm:"column:ProductID;primaryKey;autoIncrement"`
 	CateID    int    `json:"cateid" gorm:"column:CateID"`
 	Name      string `json:"name" gorm:"column:Name"`
 	Desc      string `json:"desc" gorm:"column:Desc"`

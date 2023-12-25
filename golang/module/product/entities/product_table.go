@@ -12,8 +12,8 @@ const USER_TABLE_Name = "Name"
 const USER_TABLE_Desc = "Desc"
 const USER_TABLE_Image = "Image"
 const USER_TABLE_Status = "Status"
-const USER_TABLE_CreatedAt = "CreatedAt"
-const USER_TABLE_UpdatedAt = "UpdatedAt"
+const USER_TABLE_CreatedAt = "createdAt"
+const USER_TABLE_UpdatedAt = "updatedAt"
 
 // Status
 const PRODUCT_TABLE_Status_Normal = "Normal"

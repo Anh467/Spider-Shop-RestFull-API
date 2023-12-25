@@ -43,6 +43,24 @@ create table `Product`(
     constraint CHK_Status_Product check(Status in ('Normal', 'Hot', 'Deleted')),
     CONSTRAINT FK_Product_Category FOREIGN KEY (CateID) REFERENCES Cate(CateID)
 );
+
+-- ########################### dbo.Product ###########################
+create table Price(
+	`PriceID` int primary key auto_increment not null,
+    `ProductID` int,
+    `Name` nvarchar(50) not null,
+    `Price` double default 0,
+    `Desc` nvarchar(300),
+    `Image` varchar(200),
+    `Status` varchar(10) default "Normal",
+    `Revenue` double default 0,
+    `NumWareHouse` int default 0,
+    `NumOrder` int default 0,
+    createdAt datetime default current_timestamp,
+	updatedAt datetime default current_timestamp on update current_timestamp,
+	CONSTRAINT FK_Product_ProductID FOREIGN KEY (ProductID) REFERENCES Product(ProductID)
+);
+
 -- ###############	############ dbo.Tracking ###########################
 alter table User
 drop index idx_UserID_User;
