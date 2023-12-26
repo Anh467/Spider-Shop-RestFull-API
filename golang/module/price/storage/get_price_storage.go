@@ -14,6 +14,7 @@ import (
 func (s *mySQLStore) GetPriceStorage(ctx context.Context, priceid int) *entities.PriceGet {
 	// declare
 	var price *entities.PriceGet = nil
+
 	// get the price base on priceid
 	if err := s.aptx.GormDB.
 		Where("PriceID = ?", priceid).

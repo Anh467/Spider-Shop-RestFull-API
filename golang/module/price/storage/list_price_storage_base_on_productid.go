@@ -17,7 +17,8 @@ func (s *mySQLStore) GetPriceStorageBaseOnProductID(ctx context.Context, product
 	if err := s.aptx.GormDB.
 		Table(productEntities.PRODUCT_TABLE).
 		Where("ProductID = ?", productID).
-		Count(&count); err != nil {
+		Count(&count).
+		Error; err != nil {
 		panic(err)
 	}
 	if count == 0 {
