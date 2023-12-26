@@ -1,16 +1,11 @@
 package biz
 
-var CATE_STATUS = []string{"Normal", "Hot", "Deleted"}
+var Price_STATUS = []string{"Normal", "Hot", "Deleted"}
 
 //const USER_ERR_CANNOT_CREATE = "can not create new user"
 
-// category
-const CATE_ERR_TABLE_NO_CHANGE = "Modified error, there is no change"
+// ProductID
+const PRICE_ERR_PRODUCTID_NOT_FOUND = "The requested productid does not exist"
 
-// CateID
-const CATE_ERR_CateID_EXIST = "CateID didn't exists"
-
-// Name
-const CATE_ERR_Name_Not_Blank = "Name can't be blank"
-const CATE_PATTERN_Name = `^[a-zA-ZĐđÀ-ỹ].{0,49}$`
-const CATE_ERR_PATTERN_Name = "Can’t have special character and number characters"
+// PriceID
+const PRICE_ERR_PriceID_NOT_FOUND = "The requested priceid does not exist"

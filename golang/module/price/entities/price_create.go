@@ -9,3 +9,7 @@ type PriceCreate struct {
 	Image     string  `json:"image" gorm:"column:Image"`
 	Status    string  `json:"status" gorm:"column:Status;default:Normal"`
 }
+
+func (PriceCreate) TableName() string {
+	return Price_TABLE
+}
