@@ -7,7 +7,6 @@ type PriceCreate struct {
 	Price     float64 `json:"price" gorm:"column:Price"`
 	Desc      string  `json:"desc" gorm:"column:Desc"`
 	Image     string  `json:"image" gorm:"column:Image"`
-	Status    string  `json:"status" gorm:"column:Status;default:Normal"`
 }
 
 func (PriceCreate) TableName() string {

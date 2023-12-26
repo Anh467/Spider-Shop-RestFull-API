@@ -3,7 +3,7 @@ package entities
 // Table name
 const Price_TABLE = "Price"
 
-var Price_STATUS = []string{"Normal", "Hot", "Deleted"}
+var Price_STATUS = []string{"Normal", "Hot", "Deleted", ""}
 
 // column name
 const Price_TABLE_PriceID = "PriceID"

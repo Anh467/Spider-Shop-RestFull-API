@@ -9,7 +9,7 @@ import (
 	"net/http"
 )
 
-func (s *mySQLStore) GetPriceStorageBaseOnProductID(ctx context.Context, productID int) []*entities.PriceGet {
+func (s *mySQLStore) ListPriceStorageBaseOnProductIDStorage(ctx context.Context, productID int) []*entities.PriceGet {
 	// declare
 	var count int64
 	var prices []*entities.PriceGet
