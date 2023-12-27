@@ -12,15 +12,15 @@ import (
 func getPriceRouters(v1 *gin.RouterGroup, aptx *common.AppConext) {
 	price := v1.Group("/prices")
 	{
-		price.GET("/", transport.GetPriceTransport(aptx))
-		price.GET("/productid", transport.ListPriceStorageBaseOnProductIDTransport(aptx))
+		price.GET("/:priceid", transport.GetPriceTransport(aptx))
+		price.GET("/products/:productid", transport.ListPriceStorageBaseOnProductIDTransport(aptx))
 		price.POST("/",
-			middleware.CheckRole(aptx, entities.USER_TABLE_Role_ADMIN),
+			middleware.CheckPermission(aptx, entities.USER_TABLE_Role_ADMIN),
 			transport.CreatePriceTransport(aptx))
-		price.PUT("/priceid",
+		price.PUT("/:priceid",
 			middleware.CheckRole(aptx, entities.USER_TABLE_Role_ADMIN),
 			transport.UpdatePriceTransport(aptx))
-		price.DELETE("/priceid",
+		price.DELETE("/:priceid",
 			middleware.CheckRole(aptx, entities.USER_TABLE_Role_ADMIN),
 			transport.DeletePriceTransport(aptx))
 	}

@@ -5,7 +5,10 @@ import (
 	"SpiderShop-Restfull-API/module/price/biz"
 	"SpiderShop-Restfull-API/module/price/entities"
 	"context"
+	"errors"
 	"net/http"
+
+	"gorm.io/gorm"
 )
 
 func (s *mySQLStore) UpdatePriceStorage(ctx context.Context, priceUpdate entities.PriceUpdate, priceid int) {
@@ -15,17 +18,18 @@ func (s *mySQLStore) UpdatePriceStorage(ctx context.Context, priceUpdate entitie
 	if err := s.aptx.GormDB.
 		Table(entities.Price_TABLE).
 		Where("PriceID = ?", priceid).
-		First(nil).
+		First(&entities.PriceGet{}).
 		Count(&count).
 		Error; err != nil {
+		if errors.Is(err, gorm.ErrRecordNotFound) {
+			panic(&common.ErrorHandler{
+				ErrorCode:    http.StatusNotFound,
+				ErrorMessage: biz.PRICE_ERR_PriceID_NOT_FOUND,
+			})
+		}
 		panic(err)
 	}
-	if count == 0 {
-		panic(&common.ErrorHandler{
-			ErrorCode:    http.StatusNotFound,
-			ErrorMessage: biz.PRICE_ERR_PriceID_NOT_FOUND,
-		})
-	}
+
 	// update price
 	if err := s.aptx.GormDB.
 		Table(entities.Price_TABLE).
