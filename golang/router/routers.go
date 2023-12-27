@@ -39,6 +39,9 @@ func V1Router(r *gin.Engine, aptx *common.AppConext) {
 
 			// products
 			getProductRouters(v1, aptx)
+
+			// prices
+			getPriceRouters(v1, aptx)
 		}
 	}
 }

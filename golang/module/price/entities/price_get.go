@@ -2,7 +2,7 @@ package entities
 
 type PriceGet struct {
 	PriceID      int     `json:"priceid" gorm:"column:PriceID;primaryKey"`
-	ProductID    int     `json:"ProductID" gorm:"column:ProductID"`
+	ProductID    int     `json:"productid" gorm:"column:ProductID"`
 	Name         string  `json:"name" gorm:"column:Name"`
 	Price        float64 `json:"price" gorm:"column:Price"`
 	Desc         string  `json:"desc" gorm:"column:Desc"`
